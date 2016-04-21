@@ -10,7 +10,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
 
     let gifManager = SwiftyGifManager(memoryLimit:120)
-    let images = ["img1", "img2", "img3", "img4", "img5", "img6"]
+    let images = ["2", "1", "3", "4", "5"]
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 

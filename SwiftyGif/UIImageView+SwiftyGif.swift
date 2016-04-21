@@ -105,7 +105,6 @@ public extension UIImageView {
      */
     public func startAnimatingGif() {
         self.isAnimatingGif = true
-        updateCache()
     }
 
     /**
@@ -113,7 +112,6 @@ public extension UIImageView {
      */
     public func stopAnimatingGif() {
         self.isAnimatingGif = false
-        updateCache()
     }
 
     /**
@@ -121,6 +119,7 @@ public extension UIImageView {
       - Parameter delta: The delsta from current frame we want
      */
     public func showFrameForIndexDelta(delta: Int) {
+
         self.displayOrderIndex += delta
 
         while self.displayOrderIndex >= self.gifImage!.displayOrder!.count{
@@ -130,7 +129,7 @@ public extension UIImageView {
         while self.displayOrderIndex < 0 {
             self.displayOrderIndex += self.gifImage!.displayOrder!.count
         }
-        
+
         showFrameAtIndex(self.displayOrderIndex)
     }
 
@@ -140,10 +139,7 @@ public extension UIImageView {
      */
     public func showFrameAtIndex(index: Int) {
         self.displayOrderIndex = index
-
-        self.isAnimatingGif = true
-        updateCurrentImage()
-        self.isAnimatingGif = false
+        updateFrame()
     }
 
     /**
@@ -163,16 +159,9 @@ public extension UIImageView {
      Update current image displayed. This method is called by the manager.
      */
     public func updateCurrentImage() {
-        if self.displaying {
-            if !self.haveCache {
-                self.currentImage = UIImage(CGImage: CGImageSourceCreateImageAtIndex(self.gifImage!.imageSource!,self.gifImage!.displayOrder![self.displayOrderIndex],nil)!)
-            }else{
-                if let image = (cache.objectForKey(self.displayOrderIndex) as? UIImage) {
-                    self.currentImage = image
-                }else{
-                    self.currentImage = UIImage(CGImage: CGImageSourceCreateImageAtIndex(self.gifImage!.imageSource!,self.gifImage!.displayOrder![self.displayOrderIndex],nil)!)
-                }//prevent case that cache is not ready
-            }
+
+        if self.displaying{
+            updateFrame()
             updateIndex()
             if loopCount == 0 || !isDisplayedInScreen(self)  || !self.isAnimatingGif {
                 stopDisplay()
@@ -184,6 +173,19 @@ public extension UIImageView {
             if isDiscarded(self) {
                 self.animationManager.deleteImageView(self)
             }
+        }
+    }
+
+    private func updateFrame() {
+
+        if !self.haveCache {
+            self.currentImage = UIImage(CGImage: CGImageSourceCreateImageAtIndex(self.gifImage!.imageSource!,self.gifImage!.displayOrder![self.displayOrderIndex],nil)!)
+        }else{
+            if let image = (cache.objectForKey(self.displayOrderIndex) as? UIImage) {
+                self.currentImage = image
+            }else{
+                self.currentImage = UIImage(CGImage: CGImageSourceCreateImageAtIndex(self.gifImage!.imageSource!,self.gifImage!.displayOrder![self.displayOrderIndex],nil)!)
+            }//prevent case that cache is not ready
         }
     }
 

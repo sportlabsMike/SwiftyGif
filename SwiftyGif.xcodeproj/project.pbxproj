@@ -25,6 +25,11 @@
 		FAE121E41CB2A3DD00960D00 /* SwiftyGifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE121E11CB2A3DD00960D00 /* SwiftyGifManager.swift */; };
 		FAE121E51CB2A3DD00960D00 /* UIImage+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE121E21CB2A3DD00960D00 /* UIImage+SwiftyGif.swift */; };
 		FAE121E61CB2A3DD00960D00 /* UIImageView+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE121E31CB2A3DD00960D00 /* UIImageView+SwiftyGif.swift */; };
+		FAF19DDF1CC90F9200454324 /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAF19DDA1CC90F9200454324 /* 1.gif */; };
+		FAF19DE01CC90F9200454324 /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAF19DDB1CC90F9200454324 /* 2.gif */; };
+		FAF19DE11CC90F9200454324 /* 3.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAF19DDC1CC90F9200454324 /* 3.gif */; };
+		FAF19DE21CC90F9200454324 /* 4.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAF19DDD1CC90F9200454324 /* 4.gif */; };
+		FAF19DE31CC90F9200454324 /* 5.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAF19DDE1CC90F9200454324 /* 5.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +64,11 @@
 		FAE121E11CB2A3DD00960D00 /* SwiftyGifManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyGifManager.swift; sourceTree = "<group>"; };
 		FAE121E21CB2A3DD00960D00 /* UIImage+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SwiftyGif.swift"; sourceTree = "<group>"; };
 		FAE121E31CB2A3DD00960D00 /* UIImageView+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+SwiftyGif.swift"; sourceTree = "<group>"; };
+		FAF19DDA1CC90F9200454324 /* 1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1.gif; sourceTree = "<group>"; };
+		FAF19DDB1CC90F9200454324 /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
+		FAF19DDC1CC90F9200454324 /* 3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 3.gif; sourceTree = "<group>"; };
+		FAF19DDD1CC90F9200454324 /* 4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 4.gif; sourceTree = "<group>"; };
+		FAF19DDE1CC90F9200454324 /* 5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 5.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +111,11 @@
 		FA29E9341CA9340E00E579D5 /* SwiftyGifExample */ = {
 			isa = PBXGroup;
 			children = (
+				FAF19DDA1CC90F9200454324 /* 1.gif */,
+				FAF19DDB1CC90F9200454324 /* 2.gif */,
+				FAF19DDC1CC90F9200454324 /* 3.gif */,
+				FAF19DDD1CC90F9200454324 /* 4.gif */,
+				FAF19DDE1CC90F9200454324 /* 5.gif */,
 				FA57CC871CB3EDAA000F3476 /* AppDelegate.swift */,
 				FA57CC881CB3EDAA000F3476 /* Assets.xcassets */,
 				FA57CC891CB3EDAA000F3476 /* Base.lproj */,
@@ -227,16 +242,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAF19DE31CC90F9200454324 /* 5.gif in Resources */,
+				FAF19DDF1CC90F9200454324 /* 1.gif in Resources */,
 				FA57CC9B1CB3EDAA000F3476 /* Main.storyboard in Resources */,
 				FA57CC991CB3EDAA000F3476 /* Assets.xcassets in Resources */,
+				FAF19DE01CC90F9200454324 /* 2.gif in Resources */,
 				FA57CC9F1CB3EDAA000F3476 /* img2.gif in Resources */,
 				FA57CC9E1CB3EDAA000F3476 /* img1.gif in Resources */,
 				FA57CCA01CB3EDAA000F3476 /* img3.gif in Resources */,
+				FAF19DE11CC90F9200454324 /* 3.gif in Resources */,
 				FA57CCA11CB3EDAA000F3476 /* img4.gif in Resources */,
 				FA57CCA21CB3EDAA000F3476 /* img5.gif in Resources */,
 				FA57CCA31CB3EDAA000F3476 /* img6.gif in Resources */,
 				FA57CCA41CB3EDAA000F3476 /* Info.plist in Resources */,
 				FA57CC9A1CB3EDAA000F3476 /* LaunchScreen.storyboard in Resources */,
+				FAF19DE21CC90F9200454324 /* 4.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
