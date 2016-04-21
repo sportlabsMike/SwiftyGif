@@ -13,6 +13,7 @@ let _syncFactorKey = malloc(4)
 let _haveCacheKey = malloc(4)
 let _loopCountKey = malloc(4)
 let _displayingKey = malloc(4)
+let _isAnimatingKey = malloc(4)
 let _animationManagerKey = malloc(4)
 
 public extension UIImageView {
@@ -75,6 +76,7 @@ public extension UIImageView {
                 if !manager.containsImageView(self) {
                     manager.addImageView(self)
                     startDisplay()
+                    startAnimatingGif()
                 }
             }
         }
@@ -85,7 +87,7 @@ public extension UIImageView {
     /**
      Start displaying the gif for this UIImageView.
      */
-    public func startDisplay() {
+    private func startDisplay() {
         self.displaying = true
         updateCache()
     }
@@ -93,9 +95,55 @@ public extension UIImageView {
     /**
      Stop displaying the gif for this UIImageView.
      */
-    public func stopDisplay() {
+    private func stopDisplay() {
         self.displaying = false
         updateCache()
+    }
+
+    /**
+     Start displaying the gif for this UIImageView.
+     */
+    public func startAnimatingGif() {
+        self.isAnimatingGif = true
+        updateCache()
+    }
+
+    /**
+     Stop displaying the gif for this UIImageView.
+     */
+    public func stopAnimatingGif() {
+        self.isAnimatingGif = false
+        updateCache()
+    }
+
+    /**
+     Show a specific frame based on a delta from current frame
+      - Parameter delta: The delsta from current frame we want
+     */
+    public func showFrameForIndexDelta(delta: Int) {
+        self.displayOrderIndex += delta
+
+        while self.displayOrderIndex >= self.gifImage!.displayOrder!.count{
+            self.displayOrderIndex -= self.gifImage!.displayOrder!.count
+        }
+
+        while self.displayOrderIndex < 0 {
+            self.displayOrderIndex += self.gifImage!.displayOrder!.count
+        }
+        
+        showFrameAtIndex(self.displayOrderIndex)
+    }
+
+    /**
+     Show a specific frame
+      - Parameter index: The index of frame to show
+     */
+    public func showFrameAtIndex(index: Int) {
+        self.displayOrderIndex = index
+
+        self.isAnimatingGif = true
+        updateCurrentImage()
+        self.isAnimatingGif = false
     }
 
     /**
@@ -126,11 +174,11 @@ public extension UIImageView {
                 }//prevent case that cache is not ready
             }
             updateIndex()
-            if loopCount == 0 || !isDisplayedInScreen(self) {
+            if loopCount == 0 || !isDisplayedInScreen(self)  || !self.isAnimatingGif {
                 stopDisplay()
             }
         }else{
-            if(isDisplayedInScreen(self) && loopCount != 0) {
+            if(isDisplayedInScreen(self) && loopCount != 0 && self.isAnimatingGif) {
                 startDisplay()
             }
             if isDiscarded(self) {
@@ -268,6 +316,15 @@ public extension UIImageView {
         }
         set {
             objc_setAssociatedObject(self, _displayingKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
+        }
+    }
+
+    public var isAnimatingGif: Bool {
+        get {
+            return (objc_getAssociatedObject(self, _isAnimatingKey) as! Bool)
+        }
+        set {
+            objc_setAssociatedObject(self, _isAnimatingKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
         }
     }
 
