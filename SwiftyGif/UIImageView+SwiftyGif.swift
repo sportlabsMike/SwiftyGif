@@ -139,6 +139,12 @@ public extension UIImageView {
      */
     public func showFrameAtIndex(index: Int) {
         self.displayOrderIndex = index
+
+        self.syncFactor = index
+        if self.syncFactor == 0 {
+            self.displayOrderIndex = index
+        }
+
         updateFrame()
     }
 

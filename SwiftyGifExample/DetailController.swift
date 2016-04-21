@@ -39,7 +39,7 @@ class DetailController: UIViewController {
         let time = CACurrentMediaTime()
         switch sender.state {
         case .Began:
-            self.imageView.startAnimatingGif()
+            self.imageView.stopAnimatingGif()
             break
 
         case .Changed:
@@ -50,8 +50,8 @@ class DetailController: UIViewController {
             }
             break
 
-        default :
-            self.imageView.startAnimatingGif()
+        default:
+            break
         }
         print(CACurrentMediaTime() - time)
         lastX = x
