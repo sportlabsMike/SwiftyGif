@@ -120,17 +120,17 @@ public extension UIImageView {
      */
     public func showFrameForIndexDelta(delta: Int) {
 
-        self.displayOrderIndex += delta
+        var nextIndex = self.displayOrderIndex + delta
 
-        while self.displayOrderIndex >= self.gifImage!.displayOrder!.count{
-            self.displayOrderIndex -= self.gifImage!.displayOrder!.count
+        while nextIndex >= self.gifImage!.displayOrder!.count{
+            nextIndex -= self.gifImage!.displayOrder!.count
         }
 
-        while self.displayOrderIndex < 0 {
-            self.displayOrderIndex += self.gifImage!.displayOrder!.count
+        while nextIndex < 0 {
+            nextIndex += self.gifImage!.displayOrder!.count
         }
 
-        showFrameAtIndex(self.displayOrderIndex)
+        showFrameAtIndex(nextIndex)
     }
 
     /**
@@ -139,12 +139,6 @@ public extension UIImageView {
      */
     public func showFrameAtIndex(index: Int) {
         self.displayOrderIndex = index
-
-        self.syncFactor = index
-        if self.syncFactor == 0 {
-            self.displayOrderIndex = index
-        }
-
         updateFrame()
     }
 

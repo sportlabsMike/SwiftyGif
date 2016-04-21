@@ -13,13 +13,14 @@ class DetailController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView!
 
     var gifName: String?
+    let gifManager = SwiftyGifManager(memoryLimit:100)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if let imgName = self.gifName {
             let gifImage = UIImage(gifName: imgName)
-            self.imageView.setGifImage(gifImage, manager: SwiftyGifManager.defaultManager, loopCount: -1)
+            self.imageView.setGifImage(gifImage, manager: gifManager, loopCount: -1)
         }
 
         let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(self.panGesture))
@@ -30,20 +31,20 @@ class DetailController: UIViewController {
         self.imageView.addGestureRecognizer(tapGesture)
     }
 
-    var lastX: CGFloat = 0
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
 
     func panGesture(sender:UIPanGestureRecognizer){
 
-        let x = sender.translationInView(sender.view).x
-
-        let time = CACurrentMediaTime()
         switch sender.state {
         case .Began:
             self.imageView.stopAnimatingGif()
             break
 
         case .Changed:
-            if lastX - x < 0 {
+            if sender.velocityInView(sender.view).x > 0 {
                 self.imageView.showFrameForIndexDelta(1)
             } else{
                 self.imageView.showFrameForIndexDelta(-1)
@@ -53,8 +54,7 @@ class DetailController: UIViewController {
         default:
             break
         }
-        print(CACurrentMediaTime() - time)
-        lastX = x
+
     }
 
     func tapGesture(sender:UIPanGestureRecognizer){
