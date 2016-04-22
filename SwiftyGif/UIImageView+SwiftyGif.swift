@@ -176,8 +176,10 @@ public extension UIImageView {
         }
     }
 
+    /**
+     Force update frame
+     */
     private func updateFrame() {
-
         if !self.haveCache {
             self.currentImage = UIImage(CGImage: CGImageSourceCreateImageAtIndex(self.gifImage!.imageSource!,self.gifImage!.displayOrder![self.displayOrderIndex],nil)!)
         }else{
@@ -194,7 +196,9 @@ public extension UIImageView {
      - Returns : A boolean for weather the imageView was discarded
      */
     public func isDiscarded(imageView:UIView?) -> Bool{
+
         if(imageView == nil || imageView!.superview == nil) {
+            print("discarded")
             return true
         }
         return false
@@ -220,7 +224,7 @@ public extension UIImageView {
     }
 
     /**
-     Update index.
+     Update loop count and sync factor.
      */
     private func updateIndex() {
         if let gif = self.gifImage {

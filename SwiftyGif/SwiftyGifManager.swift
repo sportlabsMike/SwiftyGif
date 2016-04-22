@@ -53,8 +53,10 @@ public class SwiftyGifManager {
      - Parameter imageView: The UIImageView we want to delete
      */
     public func deleteImageView(imageView: UIImageView){
+
         if let index = self.displayViews.indexOf(imageView) {
-            if index >= 0 && index < self.displayViews.count-1 {
+
+
                 self.displayViews.removeAtIndex(index)
                 self.totalGifSize -= imageView.gifImage!.imageSize!
                 if self.totalGifSize < memoryLimit && !self.haveCache {
@@ -65,7 +67,7 @@ public class SwiftyGifManager {
                         }
                     }
                 }
-            }
+            
         }
     }
 
