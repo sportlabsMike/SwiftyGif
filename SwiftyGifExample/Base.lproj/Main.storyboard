@@ -107,7 +107,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n5s-Ea-LQ9">
-                                <rect key="frame" x="-4" y="64" width="328" height="504"/>
+                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTV-YS-Zrg">
@@ -154,7 +154,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bTV-YS-Zrg" firstAttribute="centerX" secondItem="iwn-2l-hYY" secondAttribute="centerX" id="04m-h6-Ca0"/>
-                            <constraint firstItem="n5s-Ea-LQ9" firstAttribute="top" secondItem="Pq2-Mh-YAn" secondAttribute="bottom" id="6Va-Pf-DbA"/>
+                            <constraint firstItem="n5s-Ea-LQ9" firstAttribute="top" secondItem="Pq2-Mh-YAn" secondAttribute="bottom" constant="-64" id="6Va-Pf-DbA"/>
                             <constraint firstItem="Pb3-4L-CZm" firstAttribute="top" secondItem="bTV-YS-Zrg" secondAttribute="bottom" constant="73" id="84v-sO-ih3"/>
                             <constraint firstItem="z6j-eF-Mvp" firstAttribute="width" secondItem="z6j-eF-Mvp" secondAttribute="height" multiplier="1:1" id="Dcn-7P-vEJ"/>
                             <constraint firstItem="z6j-eF-Mvp" firstAttribute="centerY" secondItem="bTV-YS-Zrg" secondAttribute="centerY" id="EZp-Df-hSW"/>

@@ -9,7 +9,7 @@ import Foundation
 public class SwiftyGifManager {
 
     // A convenient default manager if we only have one gif to display here and there
-    static var defaultManager = SwiftyGifManager(memoryLimit: 20)
+    static var defaultManager = SwiftyGifManager(memoryLimit: 50)
     
     private var timer: CADisplayLink?
     private var displayViews: [UIImageView] = []
@@ -108,7 +108,7 @@ public class SwiftyGifManager {
             dispatch_async(dispatch_get_main_queue()){
                 imageView.image = imageView.currentImage
             }
-            if imageView.isAnimatingGif {
+            if imageView.isAnimatingGif() {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0)){
                     imageView.updateCurrentImage()
                 }

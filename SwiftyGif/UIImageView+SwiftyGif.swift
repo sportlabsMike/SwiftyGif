@@ -13,7 +13,7 @@ let _syncFactorKey = malloc(4)
 let _haveCacheKey = malloc(4)
 let _loopCountKey = malloc(4)
 let _displayingKey = malloc(4)
-let _isAnimatingKey = malloc(4)
+let _isPlayingKey = malloc(4)
 let _animationManagerKey = malloc(4)
 
 public extension UIImageView {
@@ -104,14 +104,22 @@ public extension UIImageView {
      Start displaying the gif for this UIImageView.
      */
     public func startAnimatingGif() {
-        self.isAnimatingGif = true
+        self.isPlaying = true
     }
 
     /**
      Stop displaying the gif for this UIImageView.
      */
     public func stopAnimatingGif() {
-        self.isAnimatingGif = false
+        self.isPlaying = false
+    }
+
+    /**
+     Check if this imageView is currently playing a gif
+     - Returns wether the gif is currently playing
+     */
+    public func isAnimatingGif() -> Bool{
+        return self.isPlaying
     }
 
     /**
@@ -122,12 +130,12 @@ public extension UIImageView {
 
         var nextIndex = self.displayOrderIndex + delta
 
-        while nextIndex >= self.gifImage!.displayOrder!.count{
-            nextIndex -= self.gifImage!.displayOrder!.count
+        while nextIndex >= self.gifImage!.framesCount(){
+            nextIndex -= self.gifImage!.framesCount()
         }
 
         while nextIndex < 0 {
-            nextIndex += self.gifImage!.displayOrder!.count
+            nextIndex += self.gifImage!.framesCount()
         }
 
         showFrameAtIndex(nextIndex)
@@ -163,11 +171,11 @@ public extension UIImageView {
         if self.displaying{
             updateFrame()
             updateIndex()
-            if loopCount == 0 || !isDisplayedInScreen(self)  || !self.isAnimatingGif {
+            if loopCount == 0 || !isDisplayedInScreen(self)  || !self.isPlaying {
                 stopDisplay()
             }
         }else{
-            if(isDisplayedInScreen(self) && loopCount != 0 && self.isAnimatingGif) {
+            if(isDisplayedInScreen(self) && loopCount != 0 && self.isPlaying) {
                 startDisplay()
             }
             if isDiscarded(self) {
@@ -325,12 +333,12 @@ public extension UIImageView {
         }
     }
 
-    public var isAnimatingGif: Bool {
+    private var isPlaying: Bool {
         get {
-            return (objc_getAssociatedObject(self, _isAnimatingKey) as! Bool)
+            return (objc_getAssociatedObject(self, _isPlayingKey) as! Bool)
         }
         set {
-            objc_setAssociatedObject(self, _isAnimatingKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
+            objc_setAssociatedObject(self, _isPlayingKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
         }
     }
 

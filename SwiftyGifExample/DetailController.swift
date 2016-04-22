@@ -60,7 +60,7 @@ class DetailController: UIViewController {
     // PRAGMA - Actions
 
     @IBAction func togglePlay(){
-        if self.imageView.isAnimatingGif {
+        if self.imageView.isAnimatingGif() {
             stop()
         }else {
             play()
