@@ -3,13 +3,14 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Pod License](http://img.shields.io/cocoapods/l/SDWebImage.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-High performance Gif engine
+High performance & easy to use Gif engine
 
-![video](http://i.imgur.com/v9EHNrK.gif)
+<img src="http://i.imgur.com/p8A6jJh.gif" width="280" /> <img src="http://i.imgur.com/0hJ8MzW.gifv" width="280"  />
 
 ##Features
 - [x] UIImage and UIImageView extension based
 - [x] Great CPU/Memory performances
+- [x] Control playback
 - [x] Allow control of  display quality by using 'levelOfIntegrity'
 - [x] Allow control CPU/memory tradeoff via 'memoryLimit' 
 
