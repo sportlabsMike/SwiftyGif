@@ -27,6 +27,7 @@ let _displayingKey = malloc(4)
 let _isPlayingKey = malloc(4)
 let _animationManagerKey = malloc(4)
 let _delegateKey = malloc(4)
+let _gifScaleKey = malloc(4)
 
 @objc public protocol SwiftyGifDelegate {
     @objc optional func gifDidStart()
@@ -76,10 +77,12 @@ public extension UIImageView {
      - Parameter manager: The manager to handle the gif display
      - Parameter loopCount: The number of loops we want for this gif. -1 means infinite.
      */
-    public func setGifImage(_ gifImage:UIImage, manager:SwiftyGifManager = SwiftyGifManager.defaultManager, loopCount:Int) {
+    public func setGifImage(_ gifImage:UIImage, manager:SwiftyGifManager = SwiftyGifManager.defaultManager, loopCount:Int, scale: CGFloat = 2.0) {
+        
+        self.gifScale = scale
         
         if gifImage.imageCount < 1 {
-            self.image = UIImage(data: gifImage.imageData as Data)
+            self.image = UIImage(data: gifImage.imageData as Data, scale: scale)
             return
         }
         
@@ -94,7 +97,7 @@ public extension UIImageView {
         if let gif = self.gifImage {
             
             if let source = gif.imageSource {
-                self.currentImage = UIImage(cgImage: CGImageSourceCreateImageAtIndex(source, 0, nil)!)
+                self.currentImage = UIImage(cgImage: CGImageSourceCreateImageAtIndex(source, 0, nil)!, scale: scale, orientation: .up)
                 
                 if !manager.containsImageView(self) {
                     manager.addImageView(self)
@@ -231,10 +234,10 @@ public extension UIImageView {
     }
 
     /**
-     Get frame at specifi index
+     Get frame at specific index
      */
     public func frameAtIndex(index: Int) -> UIImage {
-        return UIImage(cgImage: CGImageSourceCreateImageAtIndex(self.gifImage!.imageSource!,self.gifImage!.displayOrder![index],nil)!)
+        return UIImage(cgImage: CGImageSourceCreateImageAtIndex(self.gifImage!.imageSource!,self.gifImage!.displayOrder![index],nil)!, scale: gifScale, orientation: .up)
     }
     
     /**
@@ -344,6 +347,15 @@ public extension UIImageView {
         }
         set {
             objc_setAssociatedObject(self, _loopCountKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
+        }
+    }
+    
+    public var gifScale: CGFloat {
+        get {
+            return (objc_getAssociatedObject(self, _gifScaleKey) as! CGFloat)
+        }
+        set {
+            objc_setAssociatedObject(self, _gifScaleKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
         }
     }
     
