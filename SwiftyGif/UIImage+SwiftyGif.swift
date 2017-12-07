@@ -42,7 +42,7 @@ public extension UIImage{
      Convenience initializer. Creates a gif with its backing data. Defaulted level of integrity.
      - Parameter gifData: The actual gif data
      */
-    public convenience init(gifData:Data) {
+    @objc public convenience init(gifData:Data) {
         self.init()
         setGifFromData(gifData,levelOfIntegrity: defaultLevelOfIntegrity)
     }
@@ -52,7 +52,7 @@ public extension UIImage{
      - Parameter gifData: The actual gif data
      - Parameter levelOfIntegrity: 0 to 1, 1 meaning no frame skipping
      */
-    public convenience init(gifData:Data, levelOfIntegrity:Float) {
+    @objc public convenience init(gifData:Data, levelOfIntegrity:Float) {
         self.init()
         setGifFromData(gifData,levelOfIntegrity: levelOfIntegrity)
     }
@@ -61,7 +61,7 @@ public extension UIImage{
      Convenience initializer. Creates a gif with its backing data. Defaulted level of integrity.
      - Parameter gifName: Filename
      */
-    public convenience init(gifName: String) {
+    @objc public convenience init(gifName: String) {
         self.init()
         setGif(gifName, levelOfIntegrity: defaultLevelOfIntegrity)
     }
@@ -71,7 +71,7 @@ public extension UIImage{
      - Parameter gifName: Filename
      - Parameter levelOfIntegrity: 0 to 1, 1 meaning no frame skipping
      */
-    public convenience init(gifName: String, levelOfIntegrity: Float) {
+    @objc public convenience init(gifName: String, levelOfIntegrity: Float) {
         self.init()
         setGif(gifName, levelOfIntegrity: levelOfIntegrity)
     }
@@ -81,7 +81,7 @@ public extension UIImage{
      - Parameter data: The actual gif data
      - Parameter levelOfIntegrity: 0 to 1, 1 meaning no frame skipping
      */
-    public func setGifFromData(_ data:Data,levelOfIntegrity:Float) {
+    @objc public func setGifFromData(_ data:Data,levelOfIntegrity:Float) {
         self.imageData = data
         imageSource = CGImageSourceCreateWithData(data as CFData, nil)
         
@@ -93,7 +93,7 @@ public extension UIImage{
      Set backing data for this gif. Overwrites any existing data.
      - Parameter name: Filename
      */
-    public func setGif(_ name: String) {
+    @objc public func setGif(_ name: String) {
         setGif(name, levelOfIntegrity: defaultLevelOfIntegrity)
     }
     
@@ -101,7 +101,7 @@ public extension UIImage{
      Check the number of frame for this gif
      - Return number of frames
      */
-    public func framesCount() -> Int{
+    @objc public func framesCount() -> Int{
         if let orders = self.displayOrder{
             return orders.count
         }
@@ -113,7 +113,7 @@ public extension UIImage{
      - Parameter name: Filename
      - Parameter levelOfIntegrity: 0 to 1, 1 meaning no frame skipping
      */
-    public func setGif(_ name: String, levelOfIntegrity: Float) {
+    @objc public func setGif(_ name: String, levelOfIntegrity: Float) {
         if let url = Bundle.main.url(forResource: name,
                                      withExtension: name.getPathExtension() == "gif" ? "" : "gif") {
             if let data = try? Data(contentsOf: url) {
@@ -234,57 +234,57 @@ public extension UIImage{
     
     // PRAGMA - get / set associated values
     
-    public var imageSource: CGImageSource? {
+    @objc public var imageSource: CGImageSource? {
         get {
-            return (objc_getAssociatedObject(self, _imageSourceKey) as! CGImageSource?)
+            return (objc_getAssociatedObject(self, _imageSourceKey!) as! CGImageSource?)
         }
         set {
-            objc_setAssociatedObject(self, _imageSourceKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
+            objc_setAssociatedObject(self, _imageSourceKey!, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
         }
     }
     
     public var displayRefreshFactor: Int?{
         get {
-            return (objc_getAssociatedObject(self, _displayRefreshFactorKey) as! Int)
+            return (objc_getAssociatedObject(self, _displayRefreshFactorKey!) as! Int)
         }
         set {
-            objc_setAssociatedObject(self, _displayRefreshFactorKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
+            objc_setAssociatedObject(self, _displayRefreshFactorKey!, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
         }
     }
     
     public var imageSize: Int?{
         get {
-            return (objc_getAssociatedObject(self, _imageSizeKey) as! Int)
+            return (objc_getAssociatedObject(self, _imageSizeKey!) as! Int)
         }
         set {
-            objc_setAssociatedObject(self, _imageSizeKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
+            objc_setAssociatedObject(self, _imageSizeKey!, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
         }
     }
     
     public var imageCount: Int?{
         get {
-            return (objc_getAssociatedObject(self, _imageCountKey) as! Int)
+            return (objc_getAssociatedObject(self, _imageCountKey!) as! Int)
         }
         set {
-            objc_setAssociatedObject(self, _imageCountKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
+            objc_setAssociatedObject(self, _imageCountKey!, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
         }
     }
     
-    public var displayOrder: [Int]?{
+    @objc public var displayOrder: [Int]?{
         get {
-            return (objc_getAssociatedObject(self, _displayOrderKey) as! [Int])
+            return (objc_getAssociatedObject(self, _displayOrderKey!) as! [Int])
         }
         set {
-            objc_setAssociatedObject(self, _displayOrderKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
+            objc_setAssociatedObject(self, _displayOrderKey!, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
         }
     }
     
-    public var imageData: Data {
+    @objc public var imageData: Data {
         get {
-            return (objc_getAssociatedObject(self, _imageDataKey) as! Data)
+            return (objc_getAssociatedObject(self, _imageDataKey!) as! Data)
         }
         set {
-            objc_setAssociatedObject(self, _imageDataKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
+            objc_setAssociatedObject(self, _imageDataKey!, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
         }
     }
 }
