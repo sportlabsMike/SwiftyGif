@@ -158,7 +158,7 @@ public extension UIImage{
                 delayObject = unsafeBitCast(CFDictionaryGetValue($0,
                                                                  Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()), to: AnyObject.self)
             }
-            return delayObject as! Float
+            return delayObject.floatValue
         }
         return frameDelays
     }
